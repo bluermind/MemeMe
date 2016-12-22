@@ -20,6 +20,10 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func selectImage(_ sender: Any) {
+        let controller = UIImagePickerController()
+        present(controller, animated: true, completion: nil)
+    }
 
 }
 
