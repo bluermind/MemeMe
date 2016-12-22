@@ -9,10 +9,15 @@
 import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    // MARK: Outlets
+    @IBOutlet weak var pickedImage: UIImageView!
 
     // MARK: Image Picker Delegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            pickedImage.image = image
+        }
         dismiss(animated: true, completion: nil)
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
