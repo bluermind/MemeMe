@@ -28,20 +28,26 @@
                                     <constraint firstAttribute="height" constant="44" id="ED7-GG-jnz"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Pick" id="CwW-Ex-GLS">
+                                    <barButtonItem systemItem="add" id="CwW-Ex-GLS">
                                         <connections>
-                                            <action selector="selectImage:" destination="BYZ-38-t0r" id="9oP-Uy-9R7"/>
+                                            <action selector="pickImageFromAlbum:" destination="BYZ-38-t0r" id="Pxg-yL-8LK"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="hHR-Vb-dc3"/>
+                                    <barButtonItem systemItem="camera" id="Y8C-V6-EfB">
+                                        <connections>
+                                            <action selector="pickImageFromCamera:" destination="BYZ-38-t0r" id="ve8-7j-bmS"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RRs-Y6-eNg">
-                                <rect key="frame" x="36" y="70" width="303" height="527"/>
+                                <rect key="frame" x="36" y="100" width="303" height="467"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="RRs-Y6-eNg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="8kP-f0-PFl"/>
+                            <constraint firstItem="RRs-Y6-eNg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="80" id="8kP-f0-PFl"/>
                             <constraint firstAttribute="trailing" secondItem="3lS-hb-Wti" secondAttribute="trailing" id="8mv-bI-cmI"/>
                             <constraint firstItem="3lS-hb-Wti" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="N7Y-52-vg9"/>
                             <constraint firstItem="RRs-Y6-eNg" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="NM5-Gw-nTx"/>
@@ -51,6 +57,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cameraButton" destination="Y8C-V6-EfB" id="hyO-fU-vrD"/>
                         <outlet property="pickedImage" destination="RRs-Y6-eNg" id="nit-iB-PG2"/>
                     </connections>
                 </viewController>
