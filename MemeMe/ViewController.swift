@@ -3,16 +3,16 @@
 //  MemeMe
 //
 //  Created by Frank on 2016. 12. 22..
-//  Copyright © 2016년 Bluermind Inc. All rights reserved.
+//  Copyright © 2016 Bluermind Inc. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     // MARK: Properties
-    let defaultTopText:String = "TOP"
-    let defaultBottomText:String = "BOTTOM"
+    let _defaultTopText:String = "TOP"
+    let _defaultBottomText:String = "BOTTOM"
     
     // MARK: Outlets
     @IBOutlet weak var pickedImage: UIImageView!
@@ -31,12 +31,35 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: Overrides
+    // MARK: Text Field Delegate
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == topTextField, textField.text == _defaultTopText {
+            textField.text = ""
+        }
+        else if textField == bottomTextField, textField.text == _defaultBottomText {
+            textField.text = ""
+        }
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == topTextField, textField.text == "" {
+            textField.text = _defaultTopText
+        }
+        else if textField == bottomTextField, textField.text == "" {
+            textField.text = _defaultBottomText
+        }
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
+    // MARK: Overrides
     override func viewDidLoad() {
-        topTextField.text = defaultTopText
-        bottomTextField.text = defaultBottomText
         super.viewDidLoad()
+        topTextField.text = _defaultTopText
+        bottomTextField.text = _defaultBottomText
+        topTextField.delegate = self
+        bottomTextField.delegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -44,14 +67,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     // MARK: Actions
-
     @IBAction func pickImageFromAlbum(_ sender: Any) {
         let controller = UIImagePickerController()
         controller.delegate = self
         controller.sourceType = .photoLibrary
         present(controller, animated: true, completion: nil)
     }
-    
     @IBAction func pickImageFromCamera(_ sender: Any) {
         let controller = UIImagePickerController()
         controller.delegate = self
