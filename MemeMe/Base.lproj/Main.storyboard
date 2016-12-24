@@ -22,6 +22,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mJh-m3-Scp" userLabel="Top Text">
+                                <rect key="frame" x="36" y="62" width="303" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RRs-Y6-eNg">
+                                <rect key="frame" x="36" y="100" width="303" height="467"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m15-8x-Slp" userLabel="Bottom Text">
+                                <rect key="frame" x="36" y="575" width="303" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3lS-hb-Wti">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <constraints>
@@ -41,9 +56,6 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RRs-Y6-eNg">
-                                <rect key="frame" x="36" y="100" width="303" height="467"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -51,14 +63,22 @@
                             <constraint firstAttribute="trailing" secondItem="3lS-hb-Wti" secondAttribute="trailing" id="8mv-bI-cmI"/>
                             <constraint firstItem="3lS-hb-Wti" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="N7Y-52-vg9"/>
                             <constraint firstItem="RRs-Y6-eNg" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="NM5-Gw-nTx"/>
+                            <constraint firstItem="mJh-m3-Scp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="Ok2-9k-LJi"/>
+                            <constraint firstItem="RRs-Y6-eNg" firstAttribute="bottom" secondItem="m15-8x-Slp" secondAttribute="top" constant="-8" id="YiJ-0k-uFr"/>
+                            <constraint firstItem="RRs-Y6-eNg" firstAttribute="top" secondItem="mJh-m3-Scp" secondAttribute="bottom" constant="8" id="bib-d2-dtK"/>
+                            <constraint firstItem="m15-8x-Slp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="clS-PA-ccw"/>
+                            <constraint firstItem="m15-8x-Slp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="eNf-Fm-Jkx"/>
+                            <constraint firstItem="mJh-m3-Scp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gVH-vb-ERu"/>
                             <constraint firstItem="RRs-Y6-eNg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gZ7-g6-Tm7"/>
                             <constraint firstItem="RRs-Y6-eNg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="kme-Iy-DhY"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3lS-hb-Wti" secondAttribute="bottom" id="wpS-75-NMa"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomTextField" destination="m15-8x-Slp" id="ASy-4D-xSz"/>
                         <outlet property="cameraButton" destination="Y8C-V6-EfB" id="hyO-fU-vrD"/>
                         <outlet property="pickedImage" destination="RRs-Y6-eNg" id="nit-iB-PG2"/>
+                        <outlet property="topTextField" destination="mJh-m3-Scp" id="08C-vN-cjY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

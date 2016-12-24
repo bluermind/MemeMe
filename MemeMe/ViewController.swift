@@ -10,9 +10,15 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    // MARK: Properties
+    let defaultTopText:String = "TOP"
+    let defaultBottomText:String = "BOTTOM"
+    
     // MARK: Outlets
     @IBOutlet weak var pickedImage: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var topTextField: UITextField!
+    @IBOutlet weak var bottomTextField: UITextField!
 
     // MARK: Image Picker Delegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -28,6 +34,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // MARK: Overrides
     
     override func viewDidLoad() {
+        topTextField.text = defaultTopText
+        bottomTextField.text = defaultBottomText
         super.viewDidLoad()
     }
     override func viewWillAppear(_ animated: Bool) {
