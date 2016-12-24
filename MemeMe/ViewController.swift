@@ -13,12 +13,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // MARK: Properties
     let _defaultTopText:String = "TOP"
     let _defaultBottomText:String = "BOTTOM"
+    // with help from http://stackoverflow.com/questions/30955277/nsforegroundcolorattributename-doesnt-work-in-swift
     let memeTextAttributes:[String:Any] = [
         NSStrokeColorAttributeName: UIColor.black,
         NSForegroundColorAttributeName: UIColor.white,
         NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 20)!,
-        NSStrokeWidthAttributeName: 1.0
+        NSStrokeWidthAttributeName: -1.0
     ]
+    let maxLength = 30
     
     // MARK: Outlets
     @IBOutlet weak var pickedImage: UIImageView!
@@ -30,6 +32,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             pickedImage.image = image
+            topTextField.isHidden = false
+            bottomTextField.isHidden = false
+            resetTextField()
         }
         dismiss(animated: true, completion: nil)
     }
@@ -58,23 +63,44 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         textField.resignFirstResponder()
         return true
     }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // Character max length referenced from https://grokswift.com/uitextfield/
+        let startingLength = textField.text?.characters.count ?? 0
+        let lengthToAdd = string.characters.count
+        let lengthToReplace = range.length
+        let newLength = startingLength + lengthToAdd - lengthToReplace
+        return newLength <= maxLength
+    }
     
     // MARK: Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
-        topTextField.text = _defaultTopText
-        bottomTextField.text = _defaultBottomText
+        
+        // Top Text
         topTextField.delegate = self
-        bottomTextField.delegate = self 
+        topTextField.text = _defaultTopText
+        topTextField.isHidden = true
+        // Bottom Text
+        bottomTextField.delegate = self
+        bottomTextField.text = _defaultBottomText
+        bottomTextField.isHidden = true
     }
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         topTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.defaultTextAttributes = memeTextAttributes
         // The center alignment is not working from storyboard attributes pane.
         topTextField.textAlignment = .center
         bottomTextField.textAlignment = .center
+        
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-        super.viewWillAppear(animated)
+    }
+    
+    // MARK: Custom Functions
+    func resetTextField() {
+        topTextField.text = _defaultTopText
+        bottomTextField.text = _defaultBottomText
     }
     
     // MARK: Actions
