@@ -13,6 +13,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // MARK: Properties
     let _defaultTopText:String = "TOP"
     let _defaultBottomText:String = "BOTTOM"
+    let memeTextAttributes:[String:Any] = [
+        NSStrokeColorAttributeName: UIColor.black,
+        NSForegroundColorAttributeName: UIColor.white,
+        NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 20)!,
+        NSStrokeWidthAttributeName: 1.0
+    ]
     
     // MARK: Outlets
     @IBOutlet weak var pickedImage: UIImageView!
@@ -59,11 +65,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         topTextField.text = _defaultTopText
         bottomTextField.text = _defaultBottomText
         topTextField.delegate = self
-        bottomTextField.delegate = self
+        bottomTextField.delegate = self 
     }
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        topTextField.defaultTextAttributes = memeTextAttributes
+        bottomTextField.defaultTextAttributes = memeTextAttributes
+        // The center alignment is not working from storyboard attributes pane.
+        topTextField.textAlignment = .center
+        bottomTextField.textAlignment = .center
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        super.viewWillAppear(animated)
     }
     
     // MARK: Actions
