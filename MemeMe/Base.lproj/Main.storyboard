@@ -22,6 +22,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNW-lW-Gl0">
+                                <rect key="frame" x="11" y="25" width="40" height="30"/>
+                                <state key="normal" title="Share"/>
+                                <connections>
+                                    <action selector="shareMeme:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fVN-TR-q7b"/>
+                                </connections>
+                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RRs-Y6-eNg">
                                 <rect key="frame" x="36" y="64" width="303" height="539"/>
                             </imageView>
@@ -61,9 +68,11 @@
                         <constraints>
                             <constraint firstItem="RRs-Y6-eNg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="44" id="8kP-f0-PFl"/>
                             <constraint firstAttribute="trailing" secondItem="3lS-hb-Wti" secondAttribute="trailing" id="8mv-bI-cmI"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="NNW-lW-Gl0" secondAttribute="leading" constant="5" id="JSO-bg-bJa"/>
                             <constraint firstItem="3lS-hb-Wti" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="N7Y-52-vg9"/>
                             <constraint firstItem="RRs-Y6-eNg" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="NM5-Gw-nTx"/>
                             <constraint firstItem="mJh-m3-Scp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="Ok2-9k-LJi"/>
+                            <constraint firstItem="NNW-lW-Gl0" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="5" id="WfW-hV-Xnm"/>
                             <constraint firstItem="RRs-Y6-eNg" firstAttribute="bottom" secondItem="m15-8x-Slp" secondAttribute="bottom" constant="5" id="YiJ-0k-uFr"/>
                             <constraint firstItem="RRs-Y6-eNg" firstAttribute="top" secondItem="mJh-m3-Scp" secondAttribute="top" constant="-5" id="bib-d2-dtK"/>
                             <constraint firstItem="m15-8x-Slp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="clS-PA-ccw"/>
@@ -78,6 +87,8 @@
                         <outlet property="bottomTextField" destination="m15-8x-Slp" id="ASy-4D-xSz"/>
                         <outlet property="cameraButton" destination="Y8C-V6-EfB" id="hyO-fU-vrD"/>
                         <outlet property="pickedImage" destination="RRs-Y6-eNg" id="nit-iB-PG2"/>
+                        <outlet property="shareButton" destination="NNW-lW-Gl0" id="xKs-I5-nbM"/>
+                        <outlet property="toolbar" destination="3lS-hb-Wti" id="t3x-pC-Wgs"/>
                         <outlet property="topTextField" destination="mJh-m3-Scp" id="08C-vN-cjY"/>
                     </connections>
                 </viewController>
