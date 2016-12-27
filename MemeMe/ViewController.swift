@@ -35,7 +35,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var toolbar: UIToolbar!
-    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var navbar: UINavigationBar!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
 
     // MARK: Image Picker Delegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -123,7 +125,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func generateMemedImage() -> UIImage {
         // Hide toolbar and navbar
         toolbar.isHidden = true
-        shareButton.isHidden = true
+        navbar.isHidden = true
         
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
@@ -133,7 +135,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         // Show toolbar and navbar
         toolbar.isHidden = false
-        shareButton.isHidden = true
+        navbar.isHidden = true
         return memedImage
     }
     
@@ -148,13 +150,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     func keyboardWillShow(_ notification:Notification) {
         if bottomTextField.isFirstResponder {
-            view.frame.origin.y -= getKeyboardHeight(notification)
-            view.layoutIfNeeded()
+            //view.frame.origin.y -= getKeyboardHeight(notification)
+            
+            bottomConstraint.constant += getKeyboardHeight(notification)
+            self.view.layoutIfNeeded()
         }
     }
     func keyboardWillHide(_ notification:Notification) {
         if bottomTextField.isFirstResponder {
-            view.frame.origin.y = 0
+            bottomConstraint.constant = 0
         }
     }
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
@@ -177,6 +181,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         present(controller, animated: true, completion: nil)
     }
     @IBAction func shareMeme(_ sender: Any) {
+        
         let memedImage = generateMemedImage()
         let controller = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         let _self = self
@@ -192,6 +197,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         present(controller, animated: true, completion: nil)
         
     }
-
+    
 }
 
