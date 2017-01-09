@@ -8,13 +8,6 @@
 
 import UIKit
 
-struct Meme {
-    var topText:String
-    var bottomText:String
-    var originalImage:UIImage
-    var memedImage:UIImage
-}
-
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     // MARK: Properties
@@ -24,7 +17,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     let memeTextAttributes:[String:Any] = [
         NSStrokeColorAttributeName: UIColor.black,
         NSForegroundColorAttributeName: UIColor.white,
-        NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 20)!,
+        NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
         NSStrokeWidthAttributeName: -1.0
     ]
     let maxLength = 30
@@ -87,27 +80,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // MARK: Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Top Text
-        topTextField.delegate = self
-        topTextField.text = _defaultTopText
-        topTextField.isHidden = true
+        stylizeTextField(topTextField)
         // Bottom Text
-        bottomTextField.delegate = self
-        bottomTextField.text = _defaultBottomText
-        bottomTextField.isHidden = true
+        stylizeTextField(bottomTextField)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        topTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        // The center alignment is not working from storyboard attributes pane.
-        topTextField.textAlignment = .center
-        bottomTextField.textAlignment = .center
-        
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-        
         subscribeToKeyboardNotifications()
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -115,6 +95,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     // MARK: Custom Functions
+    func stylizeTextField(_ textField:UITextField) {
+        textField.delegate = self
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.textAlignment = .center
+        textField.text = _defaultTopText
+        textField.isHidden = true
+    }
     func resetTextField() {
         topTextField.text = _defaultTopText
         bottomTextField.text = _defaultBottomText
@@ -135,7 +122,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         // Show toolbar and navbar
         toolbar.isHidden = false
-        navbar.isHidden = true
+        navbar.isHidden = false
         return memedImage
     }
     
@@ -151,7 +138,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func keyboardWillShow(_ notification:Notification) {
         if bottomTextField.isFirstResponder {
             //view.frame.origin.y -= getKeyboardHeight(notification)
-            
             bottomConstraint.constant += getKeyboardHeight(notification)
             self.view.layoutIfNeeded()
         }
@@ -168,16 +154,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     // MARK: Actions
-    @IBAction func pickImageFromAlbum(_ sender: Any) {
+    @IBAction func pickImage(_ sender: Any) {
         let controller = UIImagePickerController()
         controller.delegate = self
-        controller.sourceType = .photoLibrary
-        present(controller, animated: true, completion: nil)
-    }
-    @IBAction func pickImageFromCamera(_ sender: Any) {
-        let controller = UIImagePickerController()
-        controller.delegate = self
-        controller.sourceType = .camera
+        // Tag: 10 - add button, 20 - camera button
+        controller.sourceType = (sender as! UIBarButtonItem).tag == 10 ? .photoLibrary : .camera
         present(controller, animated: true, completion: nil)
     }
     @IBAction func shareMeme(_ sender: Any) {

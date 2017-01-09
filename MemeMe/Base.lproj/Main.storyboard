@@ -55,15 +55,15 @@
                                     <constraint firstAttribute="height" constant="44" id="ED7-GG-jnz"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem systemItem="add" id="CwW-Ex-GLS">
+                                    <barButtonItem tag="10" systemItem="add" id="CwW-Ex-GLS">
                                         <connections>
-                                            <action selector="pickImageFromAlbum:" destination="BYZ-38-t0r" id="Pxg-yL-8LK"/>
+                                            <action selector="pickImage:" destination="BYZ-38-t0r" id="YrE-Ra-7jW"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="hHR-Vb-dc3"/>
-                                    <barButtonItem systemItem="camera" id="Y8C-V6-EfB">
+                                    <barButtonItem tag="20" systemItem="camera" id="Y8C-V6-EfB">
                                         <connections>
-                                            <action selector="pickImageFromCamera:" destination="BYZ-38-t0r" id="ve8-7j-bmS"/>
+                                            <action selector="pickImage:" destination="BYZ-38-t0r" id="5nh-Nx-NJo"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
