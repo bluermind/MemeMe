@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     // MARK: Properties
     let _defaultTopText:String = "TOP"
@@ -18,7 +18,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         NSStrokeColorAttributeName: UIColor.black,
         NSForegroundColorAttributeName: UIColor.white,
         NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-        NSStrokeWidthAttributeName: -1.0
+        NSStrokeWidthAttributeName: -3.0
     ]
     let maxLength = 30
     
@@ -91,6 +91,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         subscribeToKeyboardNotifications()
     }
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
     }
     
@@ -137,14 +138,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     func keyboardWillShow(_ notification:Notification) {
         if bottomTextField.isFirstResponder {
-            //view.frame.origin.y -= getKeyboardHeight(notification)
-            bottomConstraint.constant += getKeyboardHeight(notification)
-            self.view.layoutIfNeeded()
+            view.frame.origin.y = getKeyboardHeight(notification) * (-1)
         }
     }
     func keyboardWillHide(_ notification:Notification) {
         if bottomTextField.isFirstResponder {
-            bottomConstraint.constant = 0
+            view.frame.origin.y = 0
         }
     }
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
